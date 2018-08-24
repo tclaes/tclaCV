@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "tclacv": "tclacv",
+    "tclaCV": "tclacv",
+    "default": "tclacv"
+  }
+}
