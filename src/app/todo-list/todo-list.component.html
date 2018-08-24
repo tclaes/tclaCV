@@ -1,38 +1,39 @@
-<div class="container p-5 border-white">
+<div class="container bgTrans p-5" id="login">
   <div class="row">
     <div class="col-md-12">
-        <ul class="list-group list-group-flush">
-            <li *ngFor="let todo of todo$ | async" class="list-group-item list-group-item-action p-5">
-            <div class="row">
-                <div class="col-md-1">
-                    <input type="checkbox" class="form-check-input p-1" (change)="completedToDo(todo)" [checked]="todo.completed"></div>
-                  <div class="col-md-9" (click)="selectItemToDo(todo)">
-                    <label class="form-check-label" for="description" >{{ todo.description }}</label></div>
-                  <div class="col-md-2 text-right">
-                    <button (click)="deleteToDo(todo)"  class="btn btn-danger">Delete</button>
-                  </div>
+      <ul class="list-group list-group-flush">
+        <li *ngFor="let todo of todo$ | async" class="list-group-item list-group-item-action p-3">
+          <div class="row">
+            <div class="col-md-2 text-center">
+              <input type="checkbox" class="form-check-input" (change)="completedToDo(todo)" [checked]="todo.completed">
             </div>
-            </li>
-          </ul>
+            <div class="col-md-8" (click)="selectItemToDo(todo)">
+              <label class="form-check-label" for="description">{{ todo.description }}</label>
+            </div>
+            <div class="col-md-2 text-right">
+              <button (click)="deleteToDo(todo)" class="btn btn-danger btn-sm">Delete</button>
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
   <hr>
-  <form id="control">
-      <div class="row d-flex justify-content-between">
-          <div class="col-md-10">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Task description: </span>
-              </div>
-              <textarea [(ngModel)] = "description" name="description" class="form-control" aria-label="Task description"></textarea>
-            </div>
+  <div class="row">
+      <div class="col-md-10">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Task description: </span>
           </div>
-          <div class="col-md-2">
-            <button [(ngModel)]="btn" name="btn" *ngIf="btn=='Add'" (click)="addToDo(description)" class="btn btn-primary" ngDefaultControl>{{btn}}</button>
-            <button [(ngModel)]="btn" name="btn" *ngIf="btn=='Update'" (click)="updateToDo(description)" class="btn btn-primary" ngDefaultControl>{{btn}}</button>
-            <button *ngIf="btn=='Update'" class="btn btn-danger small" (click)="cancel()">Cancel</button>
-          </div>
+          <textarea [(ngModel)]="description" name="description" class="form-control" aria-label="Task description"></textarea>
+        </div>
+      </div>
+      <div class="col-md-2 text-right">
+        <button [(ngModel)]="btn" name="btn" *ngIf="btn=='Add'" (click)="addToDo(description)" class="btn btn-primary btn-sm m-1"
+          ngDefaultControl>{{btn}}</button>
+        <button [(ngModel)]="btn" name="btn" *ngIf="btn=='Update'" (click)="updateToDo(description)" class="btn btn-primary btn-sm m-1"
+          ngDefaultControl>{{btn}}</button>
+        <button *ngIf="btn=='Update'" class="btn btn-danger btn-sm m-1" (click)="cancel()">Cancel</button>
+    </div>
   </div>
-</form>
 </div>
-
