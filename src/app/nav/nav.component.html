@@ -1,32 +1,37 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
-  <a class="navbar-brand" routerLink="home"><span style="color: red">.</span>tcla</a>
-  <button (click)="toggleCollapse()" class="navbar-toggler" type="button" aria-controls="navbarSupportedContent"
-    aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<nav class="navbar navbar-expand-lg navbar-dark mb-5">
+  <div class="container">
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent" [class.show]="show">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" routerLink="home">Home
-          <span class="sr-only">(current)</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="todo">ToDo</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-        <div *ngIf="auth.user | async; then loggedIn else loggedOut"></div>
+      <a class="navbar-brand" routerLink="home"><span style="color: red">.</span>TCLA</a>
+      <button (click)="toggleCollapse()" class="navbar-toggler" type="button" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-        <ng-template #loggedOut>
-            <button class="btn btn-outline-success" routerLink="/login">Login</button>
-        </ng-template>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent" [class.show]="show">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" routerLink="home">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="todo">ToDo</a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <div *ngIf="auth.user | async; then loggedIn else loggedOut"></div>
 
-        <ng-template #loggedIn>
-            <button class="btn btn-outline-warning" (click) = "signOut()">Sign out</button>
-        </ng-template>
+            <ng-template #loggedOut>
+                <button class="btn btn-success" routerLink="/login">Login</button>
+            </ng-template>
 
-    </form>
+            <ng-template #loggedIn>
+                <button class="btn btn-warning" (click) = "signOut()">Sign out</button>
+            </ng-template>
+
+        </form>
+      </div>
+
   </div>
+
 </nav>

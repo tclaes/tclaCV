@@ -1,11 +1,11 @@
-<div class="container">
+<div class="container p-5 border-white">
   <div class="row">
     <div class="col-md-12">
         <ul class="list-group list-group-flush">
-            <li *ngFor="let todo of todo$ | async" class="list-group-item list-group-item-action">
+            <li *ngFor="let todo of todo$ | async" class="list-group-item list-group-item-action p-5">
             <div class="row">
                 <div class="col-md-1">
-                    <input type="checkbox" class="form-check-input" (change)="completedToDo(todo)" [checked]="todo.completed"></div>
+                    <input type="checkbox" class="form-check-input p-1" (change)="completedToDo(todo)" [checked]="todo.completed"></div>
                   <div class="col-md-9" (click)="selectItemToDo(todo)">
                     <label class="form-check-label" for="description" >{{ todo.description }}</label></div>
                   <div class="col-md-2 text-right">

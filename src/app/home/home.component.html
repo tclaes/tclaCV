@@ -1,11 +1,14 @@
-<div class="container mt-3">
+<div class="container p-5" id="home">
     <div *ngIf="auth.user | async; then authenticated else guest">
 
       </div>
 
       <ng-template #guest>
-        <h3>Welkom om een todo te kunnen toevoegen moet u eerst inloggen</h3>
-        <app-login></app-login>
+        <div class="container">
+            <h3>Welkom om een todo te kunnen toevoegen moet u eerst inloggen</h3>
+            <app-login></app-login>
+        </div>
+
       </ng-template>
 
       <ng-template #authenticated>
