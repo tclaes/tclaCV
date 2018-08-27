@@ -58,12 +58,12 @@ export class TodoListComponent implements OnInit {
     this.todoList.doc(todo.id).update({
       description: todoDesc
     });
+    this.reset();
   }
 
   deleteToDo(todo: Todo) {
     this.todoList.doc(todo.id).delete();
-    this.description = '';
-    this.btn = 'Add';
+    this.reset();
   }
 
   completedToDo(todo: Todo) {
@@ -74,8 +74,12 @@ export class TodoListComponent implements OnInit {
   }
 
   cancel() {
-    this.description = '';
+    this.reset();
+  }
+
+  reset() {
     this.btn = 'Add';
+    this.description = '';
   }
 
   ngOnInit() {

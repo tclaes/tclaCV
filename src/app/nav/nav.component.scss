@@ -1,0 +1,13 @@
+nav {
+  background: transparent;
+  font-weight: bold;
+  font-size: 1.3rem;
+
+  @media screen and (max-width: 500px){
+    background: black;
+  }
+}
+
+.navbar-brand {
+  font-weight: bolder;
+}

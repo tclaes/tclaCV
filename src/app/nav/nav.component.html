@@ -1,26 +1,32 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#"><span style="color: red">.</span>tcla</a>
-  <button (click)="toggleCollapse()" class="navbar-toggler" type="button" aria-controls="navbarSupportedContent"
-    aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<nav class="navbar navbar-expand-lg navbar-dark mb-2">
+  <div class="container">
+      <a class="navbar-brand" routerLink="/"><span style="color: red">.</span>TCLA</a>
+      <button (click)="toggleCollapse()" class="navbar-toggler" type="button" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent" [class.show]="show">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home
-          <span class="sr-only">(current)</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="todo">CV</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <!-- <input class="form-control mr-sm-2" type="input" placeholder="Username" aria-label="Username" #email>
-      <input class="form-control mr-sm-2" type="input" placeholder="Password" aria-label="Password" #password>
-      <button class="btn btn-outline-success my-2 my-sm-0" (click)="signInUser(email, password)" type="submit">Sign in</button> -->
-        <button class="btn btn-outline-warning" (click) = "signOut()">Sign out</button>
-    </form>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent" [class.show]="show">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="home" routerLinkActive="active">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="todo" routerLinkActive="active">ToDo</a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <div *ngIf="auth.user | async; then loggedIn else loggedOut"></div>
+
+            <ng-template #loggedOut>
+                <button class="btn btn-success" routerLink="login">Login</button>
+            </ng-template>
+
+            <ng-template #loggedIn>
+                <button class="btn btn-warning" (click) = "signOut()">Sign out</button>
+            </ng-template>
+        </form>
+      </div>
+
   </div>
 </nav>
