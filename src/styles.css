@@ -1,22 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+html {
+  background:linear-gradient(
+    rgba(255,255,255,0.1),
+    rgba(255,255,255,0.1)),
+    url(assets/images/milky-way.jpg);
+    background-repeat: no-repeat;
+}
 
 body {
 
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
  }
 
-#background {
-  position: absolute;
-  background:linear-gradient(
-    rgba(255,255,255,0.1),
-    rgba(255,255,255,0.1)),
-    url(assets/images/milky-way.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1;
-}
 
 .bgTrans{
   background: rgba(255,255,255,0.5);

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../core/auth.service';
+import { RouterLinkActive, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -9,7 +10,9 @@ import { AuthService } from '../core/auth.service';
 export class NavComponent implements OnInit {
   show = false;
 
-  constructor(public auth: AuthService) { }
+  constructor(public auth: AuthService, route: ActivatedRoute) {
+
+   }
 
   ngOnInit() {
   }

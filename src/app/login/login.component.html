@@ -9,7 +9,7 @@
     <input type="password" class="form-control" placeholder="Password">
   </div>
   <button type="submit" class="btn btn-primary mr-1">Submit</button>
-  <button (click)="auth.googleLogin()" routerLink="todo" class="btn btn-dark">
+  <button (click)="auth.googleLogin()" routerLink="todo" routerLinkActive="active" class="btn btn-dark">
     <fa-icon [icon]="faGoogle"></fa-icon> Login with Google
   </button>
 </form>
