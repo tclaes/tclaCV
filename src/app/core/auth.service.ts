@@ -45,6 +45,24 @@ export class AuthService {
     return this.oAuthLogin(provider);
   }
 
+  emailSignUp(email: string, password: string) {
+    return this.afAuth.auth
+      .createUserWithEmailAndPassword(email, password)
+      .then(credential => {
+        return this.updateUserData(credential.user); // if using firestore
+      })
+      .catch(error => this.handleError(error));
+  }
+
+  emailLogin(email: string, password: string) {
+    return this.afAuth.auth
+      .signInWithEmailAndPassword(email, password)
+      .then(credential =>{
+        return this.updateUserData(credential.user)
+      })
+      .catch(error => this.handleError(error));
+  }
+
   private oAuthLogin(provider) {
     return this.afAuth.auth.signInWithPopup(provider).then(credential => {
       this.updateUserData(credential.user);
@@ -74,4 +92,17 @@ export class AuthService {
       this.router.navigate(['/']);
     });
   }
+
+
+
+    // If error, console log and notify user
+    private handleError(error: Error) {
+      console.error(error);
+      this.notify.update(error.message, 'error');
+    }
+
+  }
+
 }
+
+

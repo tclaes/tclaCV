@@ -1,0 +1,20 @@
+/* You can add global styles to this file, and also import other style files */
+
+body {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  background: grey;
+  @media screen and (min-width: 700px){
+    background:linear-gradient(
+      rgba(255,255,255,0.1),
+      rgba(255,255,255,0.1)),
+      url(assets/images/milky-way.jpg);
+      background-repeat: no-repeat;
+  }
+ }
+
+.bgTrans{
+  background: rgba(255,255,255,0.7);
+  border-radius: 10px;
+ }
+
+
