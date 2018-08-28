@@ -1,23 +1,26 @@
 <div *ngIf="auth.user | async as user">
   <h1>CV van {{ user.displayName }}</h1>
-  <img src="cv_photo" alt="Photo from current user">
-  <div *ngIf="currentUpload">
-      <div class="progress">
-        <div class="progress-bar progress-bar-animated" [ngStyle]="{ 'width': currentUpload?.progress + '%' }"></div>
-      </div>
-      Progress: {{currentUpload?.name}} | {{currentUpload?.progress}}% Complete
-    </div>
+  <img src="{{ user.photoURL }}" id="cv_picture" width="200px" alt="Photo from current user">
+  <br>
+  <div *ngIf="user.photoURL == ''">
+
+      <div *ngIf="currentUpload">
+          <div class="progress">
+            <div class="progress-bar progress-bar-animated" [ngStyle]="{ 'width': currentUpload?.progress + '%' }"></div>
+          </div>
+          Progress: {{currentUpload?.name}} | {{currentUpload?.progress}}% Complete
+        </div><br>
 
         <label>
-           <input type="file" (change)="detectFiles($event)">
+          <input type="file" (change)="detectFiles($event)">
         </label>
 
-        <button
-                [disabled]="!selectedFiles"
-                (click)="uploadSingle()">
-
+        <button [disabled]="!selectedFiles" (click)="uploadSingle(user)">
           Upload Single
         </button>
 
-       
+  </div>
+
+
+
 </div>

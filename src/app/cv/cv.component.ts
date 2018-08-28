@@ -21,20 +21,9 @@ export class CvComponent {
     this.selectedFiles = event.target.files;
   }
 
-  uploadSingle() {
+  async uploadSingle(user) {
     const file = this.selectedFiles.item(0);
     this.currentUpload = new Upload(file);
-    this.upSvc.pushUpload(this.currentUpload);
+    this.upSvc.pushUpload(this.currentUpload, user);
   }
-
-  uploadMulti() {
-    const files = this.selectedFiles;
-    const filesIndex = _.range(files.length);
-    _.each(filesIndex, (idx) => {
-      this.currentUpload = new Upload(files[idx]);
-      this.upSvc.pushUpload(this.currentUpload)
-    });
-  }
-
-
 }

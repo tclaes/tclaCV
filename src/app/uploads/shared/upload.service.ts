@@ -5,44 +5,60 @@ import { Upload } from './upload';
 
 import * as firebase from 'firebase/app';
 import 'firebase/storage';
+import { AuthService } from '../../core/auth.service';
 
 @Injectable()
 export class UploadService {
-
-  constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase) { }
+  constructor(
+    private afAuth: AngularFireAuth,
+    private db: AngularFireDatabase,
+    public auth: AuthService
+  ) {}
 
   private basePath = '/uploads';
-  uploads: AngularFireList<Upload[]>;
 
-  pushUpload(upload: Upload) {
+  pushUpload(upload: Upload, user) {
+
     const storageRef = firebase.storage().ref();
-    const uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
+    const uploadTask = storageRef
+      .child(`${this.basePath}/${upload.file.name}`)
+      .put(upload.file);
 
-    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
-      (snapshot) => {
-        upload.progress = (uploadTask.snapshot.bytesTransferred / uploadTask.snapshot.totalBytes) * 100;
+    uploadTask.on(
+      firebase.storage.TaskEvent.STATE_CHANGED,
+      snapshot => {
+        upload.progress =
+          (uploadTask.snapshot.bytesTransferred /
+            uploadTask.snapshot.totalBytes) *
+          100;
       },
-      (error) => {
-        console.log(error);
+      error => {
+        console.log('This is wrong: ' , error);
       },
       () => {
-        upload.url = uploadTask.snapshot.downloadURL;
-        upload.name = upload.file.name;
-        this.saveFileData(upload);
+      uploadTask.snapshot.ref.getDownloadURL()
+          .then( downloadURL => {
+            const data = {
+              uid: user.uid,
+              displayName: user.displayName,
+              photoURL: downloadURL,
+              email: user.email
+            };
+
+            this.auth.updateUserData(data);
+            return downloadURL;
+          });
+        // this.saveFileData(upload);
       }
     );
   }
 
-  private saveFileData(upload: Upload) {
-    this.db.list(`${this.basePath}/`).push(upload);
-  }
-
   deleteUpload(upload: Upload) {
     this.deleteFileData(upload.$key)
-    .then( () => {
-      this.deleteFileStorage(upload.name)
-    })
-    .catch(error => console.log(error))
+      .then(() => {
+        this.deleteFileStorage(upload.name);
+      })
+      .catch(error => console.log(error));
   }
 
   // Deletes the file details from the realtime db
@@ -52,9 +68,8 @@ export class UploadService {
 
   // Firebase files must have unique names in their respective storage dir
   // So the name serves as a unique key
-  private deleteFileStorage(name:string) {
+  private deleteFileStorage(name: string) {
     const storageRef = firebase.storage().ref();
     storageRef.child(`${this.basePath}/${name}`).delete();
   }
-
 }
