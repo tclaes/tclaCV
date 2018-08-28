@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
 
 import * as firebase from 'firebase/app';
-import { auth } from 'firebase';
 import { AngularFireAuth } from 'angularfire2/auth';
 import {
   AngularFirestore,
@@ -93,16 +92,12 @@ export class AuthService {
     });
   }
 
-
-
-    // If error, console log and notify user
+  // If error, console log and notify user
     private handleError(error: Error) {
       console.error(error);
-      this.notify.update(error.message, 'error');
     }
-
-  }
-
 }
+
+
 
 
