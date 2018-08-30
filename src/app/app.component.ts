@@ -7,6 +7,7 @@ import { AuthService } from './core/auth.service';
 })
 export class AppComponent {
   title = 'app';
+
   constructor(private auth: AuthService) {}
 }
 

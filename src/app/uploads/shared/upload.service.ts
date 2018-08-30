@@ -16,6 +16,7 @@ export class UploadService {
   ) {}
 
   private basePath = '/uploads';
+  edit = false;
 
   pushUpload(upload: Upload, user) {
 
@@ -44,8 +45,9 @@ export class UploadService {
               photoURL: downloadURL,
               email: user.email
             };
-
+            console.log(this.auth.user);
             this.auth.updateUserData(data);
+            this.edit = false;
             return downloadURL;
           });
         // this.saveFileData(upload);

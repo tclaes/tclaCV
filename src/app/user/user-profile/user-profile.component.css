@@ -1,0 +1,25 @@
+#cv_picture {
+  min-width: 200px;
+  min-height: 200px;
+  border-radius: 40%;
+  object-fit: contain;
+}
+
+#edit {
+  display: flex;
+  float: right;
+}
+
+#socialmedia a {
+  margin: 5px;
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+

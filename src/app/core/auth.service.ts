@@ -10,13 +10,7 @@ import {
 
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-
-interface User {
-  uid: string;
-  email: string;
-  photoURL?: string;
-  displayName?: string;
-}
+import { User } from '../user/user';
 
 @Injectable()
 export class AuthService {

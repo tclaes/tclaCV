@@ -1,0 +1,53 @@
+<div *ngIf="auth.user | async as user">
+    <button id='edit' #edit (click)="upSvc.edit = !upSvc.edit" class="btn btn-success">Edit</button>
+    <div class="row">
+      <div id="profile_img" class="col-md-3">
+        <img src="{{ user.photoURL }}" id="cv_picture" width="200px" alt="Photo from current user">
+        <div *ngIf="upSvc.edit">
+          <div *ngIf="currentUpload">
+            <div class="progress">
+              <div class="progress-bar progress-bar-animated" [ngStyle]="{ 'width': currentUpload?.progress + '%' }"></div>
+            </div>
+            Progress: {{currentUpload?.name}} | {{currentUpload?.progress}}% Complete
+          </div><br>
+
+          <input type="file" name="file" id="file" (change)="uploadSingle($event, user)" class="form-control-file inputfile">
+          <label for="file" class="btn btn-success"> Choose a file </label>
+
+        </div>
+      </div>
+      <div id="about" class="col-md-7">
+        <h1>{{ user.displayName }}</h1>
+
+        <table class="table table-striped">
+          <tr>
+            <td class="font-weight-bold">Adress:</td>
+            <td>{{ user.adress }}</td>
+          </tr>
+          <tr>
+            <td class="font-weight-bold">Phone:</td>
+            <td>{{ user.phone }}</td>
+          </tr>
+          <tr>
+            <td class="font-weight-bold">Email:</td>
+            <td>
+              <a href="mailto:{{ user.email }}">{{ user.email }}</a>
+            </td>
+          </tr>
+        </table>
+
+        <div id="socialmedia">
+          <a href="{{ user.twitter }}">
+            <fa-icon [icon]="['fab', 'twitter']" size="2x"></fa-icon>
+          </a>
+          <a href="{{ user.facebook }}">
+            <fa-icon [icon]="['fab', 'facebook']" size="2x"></fa-icon>
+          </a>
+        </div>
+
+      </div>
+      <br>
+    </div>
+
+  </div>
+
