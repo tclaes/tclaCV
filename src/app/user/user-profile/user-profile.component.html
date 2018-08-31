@@ -1,5 +1,5 @@
 <div *ngIf="auth.user | async as user">
-  <button id='edit' #edit (click)="upSvc.edit = !upSvc.edit" class="btn btn-success">Edit</button>
+  <button id='edit' #edit (click)="upSvc.edit = !upSvc.edit" [disabled]="upSvc.edit" class="btn btn-success">Edit</button>
   <button id='save' *ngIf="upSvc.edit" #save (click)="updateUserData(user)" class="btn btn-success">Save</button>
 
   <div class="row">

@@ -11,9 +11,6 @@ import * as _ from 'lodash';
 })
 export class UserComponent {
 
-  selectedFiles: FileList;
-  currentUpload: Upload;
-
   constructor(public auth: AuthService, public upSvc: UploadService) { }
 
 }

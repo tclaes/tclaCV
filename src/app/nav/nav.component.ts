@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '../core/auth.service';
 import { RouterLinkActive, ActivatedRoute } from '@angular/router';
 
@@ -7,23 +7,14 @@ import { RouterLinkActive, ActivatedRoute } from '@angular/router';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss']
 })
-export class NavComponent implements OnInit {
+export class NavComponent {
   show = false;
 
-  constructor(public auth: AuthService, route: ActivatedRoute) {
-
-   }
-
-  ngOnInit() {
-  }
+  constructor(public auth: AuthService, route: ActivatedRoute) {}
 
   toggleCollapse() {
     this.show = !this.show;
   }
-
-  // signInUser(email: string, password: string) {
-
-  // }
 
   signOut() {
     this.auth.signOut();

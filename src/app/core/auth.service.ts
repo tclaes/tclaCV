@@ -9,7 +9,7 @@ import {
 } from 'angularfire2/firestore';
 
 import { Observable, of } from 'rxjs';
-import { switchMap, map } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { User } from '../user/user';
 
 @Injectable()
@@ -32,21 +32,6 @@ export class AuthService {
         }
       })
     );
-    this.authState = afAuth.authState;
-  }
-
-  // Returns true if user is logged in
-  get authenticated(): boolean {
-      return this.authState !== null;
-  }
-
-  get currentUser() {
-    return this.authenticated ? this.authState : null;
-  }
-
-      // Returns current user UID
-  get currentUserId(): string {
-    return this.authenticated ? this.authState.uid : '';
   }
 
   googleLogin() {
@@ -75,7 +60,6 @@ export class AuthService {
 
   private oAuthLogin(provider) {
     return this.afAuth.auth.signInWithPopup(provider).then(credential => {
-      this.authState = credential.user;
       this.updateUserData(credential.user);
     });
   }
@@ -87,16 +71,7 @@ export class AuthService {
       `users/${user.uid}`
     );
 
-
-    const data = {
-      uid: user.uid,
-      email: user.email,
-      address: user.address,
-      phone: user.phone,
-      displayName: user.displayName,
-      photoURL: user.photoURL
-    };
-
+    const data = {...user};
 
     return userRef.update(data);
   }

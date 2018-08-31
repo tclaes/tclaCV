@@ -13,7 +13,7 @@
 
       <ng-template #authenticated>
         <div *ngIf="auth.user | async as user">
-              <app-todo-list></app-todo-list>
+              <h1>Welkom {{ user.displayName }}</h1>
         </div>
       </ng-template>
 

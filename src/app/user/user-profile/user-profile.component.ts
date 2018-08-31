@@ -5,7 +5,6 @@ import * as _ from 'lodash';
 import { AuthService } from '../../core/auth.service';
 import { log } from 'util';
 import { User } from '../user';
-import { map, switchMap, throwIfEmpty } from 'rxjs/operators';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
 @Component({
@@ -19,29 +18,31 @@ export class UserProfileComponent {
   currentUpload: Upload;
   user;
   address = '';
-  displayName;
+  displayName = '';
   phone = '';
   email = '';
 
   constructor(public auth: AuthService, public upSvc: UploadService, private af: AngularFireDatabase) {
     this.auth.user.subscribe(user => {
-      this.user = user;
-      this.displayName = this.user.displayName;
-      this.address = this.user.address || null;
-      this.phone = this.user.phone || null;
-      this.email = this.user.email;
+      if (user) {
+        this.user = user;
+        this.displayName = this.user.displayName;
+        this.address = this.user.address || '';
+        this.phone = this.user.phone || '';
+        this.email = this.user.email;
+      }
+
     });
   }
 
   updateUserData() {
-    const data = {...this.user,
-      displayName: this.displayName,
-      address: this.address,
-      phone: this.phone,
-      email: this.email
-    };
 
-    this.auth.updateUserData(data);
+    this.displayName !== null ? this.user.displayName = this.displayName : this.displayName = '';
+    this.address !== null ? this.user.address = this.address : this.address = '';
+    this.phone !== null ? this.user.phone = this.phone : this.phone = '';
+    this.email !== null ? this.user.email = this.email : this.email = '';
+
+    this.auth.updateUserData(this.user);
     this.upSvc.edit = false;
   }
 

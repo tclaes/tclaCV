@@ -7,13 +7,10 @@ import { faGoogle } from '@fortawesome/free-brands-svg-icons';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   faGoogle = faGoogle;
 
   constructor(public auth: AuthService) { }
-
-  ngOnInit() {
-  }
 
 }
