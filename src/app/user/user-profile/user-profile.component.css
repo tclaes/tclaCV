@@ -5,9 +5,10 @@
   object-fit: contain;
 }
 
-#edit {
+#edit, #save {
   display: flex;
   float: right;
+  margin: 5px;
 }
 
 #socialmedia a {

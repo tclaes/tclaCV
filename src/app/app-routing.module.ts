@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { AuthGuard } from './core/auth.guard';
-import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AppComponent } from './app.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
-import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { CvComponent } from './cv/cv.component';
 

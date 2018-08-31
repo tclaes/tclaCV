@@ -6,6 +6,7 @@ import { Upload } from './upload';
 import * as firebase from 'firebase/app';
 import 'firebase/storage';
 import { AuthService } from '../../core/auth.service';
+import { User } from '../../user/user';
 
 @Injectable()
 export class UploadService {
@@ -18,8 +19,7 @@ export class UploadService {
   private basePath = '/uploads';
   edit = false;
 
-  pushUpload(upload: Upload, user) {
-
+  pushUpload(upload: Upload, user: User) {
     const storageRef = firebase.storage().ref();
     const uploadTask = storageRef
       .child(`${this.basePath}/${upload.file.name}`)
@@ -40,17 +40,13 @@ export class UploadService {
       uploadTask.snapshot.ref.getDownloadURL()
           .then( downloadURL => {
             const data = {
-              uid: user.uid,
-              displayName: user.displayName,
-              photoURL: downloadURL,
-              email: user.email
+              ...user,
+              photoURL: downloadURL
             };
-            console.log(this.auth.user);
             this.auth.updateUserData(data);
             this.edit = false;
             return downloadURL;
           });
-        // this.saveFileData(upload);
       }
     );
   }
