@@ -31,7 +31,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { CvComponent } from './cv/cv.component';
 import { UploadModule } from './uploads/shared/upload.module';
 import { UserComponent } from './user/user.component';
-
+import { EducationComponent } from './cv/education/education.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +43,8 @@ import { UserComponent } from './user/user.component';
     HomeComponent,
     FooterComponent,
     CvComponent,
-    UserComponent
+    UserComponent,
+    EducationComponent
   ],
   imports: [
     BrowserModule,

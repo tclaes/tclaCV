@@ -1,0 +1,5 @@
+#edit, #save {
+  display: flex;
+  float: right;
+  margin: 5px;
+}

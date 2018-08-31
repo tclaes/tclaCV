@@ -18,21 +18,20 @@ export class UserProfileComponent {
   selectedFiles: FileList;
   currentUpload: Upload;
   user;
-  address: string;
+  address = '';
   displayName;
-  phone;
-  email;
+  phone = '';
+  email = '';
 
   constructor(public auth: AuthService, public upSvc: UploadService, private af: AngularFireDatabase) {
     this.auth.user.subscribe(user => {
       this.user = user;
       this.displayName = this.user.displayName;
-      this.address = this.user.address;
-      this.phone = this.user.phone;
+      this.address = this.user.address || null;
+      this.phone = this.user.phone || null;
       this.email = this.user.email;
     });
   }
-
 
   updateUserData() {
     const data = {...this.user,
