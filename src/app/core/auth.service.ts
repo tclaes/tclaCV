@@ -51,26 +51,19 @@ export class AuthService {
   emailLogin(email: string, password: string) {
     return this.afAuth.auth
       .signInWithEmailAndPassword(email, password)
-      .then(credential => {
-        this.authState = credential;
-        return this.updateUserData(credential.user);
-      })
       .catch(error => this.handleError(error));
   }
 
   private oAuthLogin(provider) {
-    return this.afAuth.auth.signInWithPopup(provider).then(credential => {
-      this.updateUserData(credential.user);
-    });
+    return this.afAuth.auth.signInWithPopup(provider)
+    // .then(credential => {
+    //   this.updateUserData(credential.user);
+    // });
   }
 
   updateUserData(user: User) {
-    // Sets data to firestore on login
 
-    const userRef: AngularFirestoreDocument<User> = this.afs.doc(
-      `users/${user.uid}`
-    );
-
+    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
     const data = {...user};
 
     return userRef.update(data);

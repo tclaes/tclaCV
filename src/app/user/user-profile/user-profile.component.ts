@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UploadService } from '../../uploads/shared/upload.service';
 import { Upload } from '../../uploads/shared/upload';
-import * as _ from 'lodash';
 import { AuthService } from '../../core/auth.service';
-import { log } from 'util';
-import { User } from '../user';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
 @Component({
