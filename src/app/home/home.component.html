@@ -13,7 +13,7 @@
 
       <ng-template #authenticated>
         <div *ngIf="auth.user | async as user">
-              <app-todo-list></app-todo-list>
+              <h1 class="font-weight-bold">Dag {{ user.displayName }}</h1>
         </div>
       </ng-template>
 

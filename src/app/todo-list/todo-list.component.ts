@@ -3,8 +3,11 @@ import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/fires
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+import { AuthService } from '../core/auth.service';
+
 export interface Todo {
   id?: string;
+  uid?: string;
   description: string;
   completed: boolean;
 }
@@ -16,6 +19,7 @@ export interface Todo {
 })
 export class TodoListComponent implements OnInit {
 
+  userID;
   description = '';
   btn = 'Add';
   todo: Todo = {
@@ -25,9 +29,13 @@ export class TodoListComponent implements OnInit {
   todoList: AngularFirestoreCollection<Todo>;
   todo$: Observable<Todo[]>;
 
-  constructor(private afs: AngularFirestore) {
+  constructor(private afs: AngularFirestore, public auth: AuthService) {
 
-    this.todoList = this.afs.collection('todos');
+    this.auth.user.subscribe(user => {
+      this.userID = user.uid;
+    });
+
+    this.todoList = this.afs.collection(`todos`);
     this.todo$ = this.todoList.snapshotChanges().pipe(
       map(actions => {
         return actions.map( action => {
@@ -42,7 +50,7 @@ export class TodoListComponent implements OnInit {
 
   addToDo(todoDesc: string) {
     if (todoDesc && todoDesc.trim().length) {
-      this.todoList.add({ description: todoDesc, completed: false });
+      this.todoList.add({uid: this.userID, description: todoDesc, completed: false });
     }
     this.description = '';
   }
@@ -56,6 +64,7 @@ export class TodoListComponent implements OnInit {
   updateToDo(todoDesc: String) {
     const todo = this.todo;
     this.todoList.doc(todo.id).update({
+      uid: this.userID,
       description: todoDesc
     });
     this.reset();
